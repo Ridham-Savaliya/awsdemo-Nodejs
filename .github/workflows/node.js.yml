@@ -30,5 +30,10 @@ jobs:
     - name: Install PM2 globally
       run: npm install -g pm2
 
+    - name : enviroments setups
+      run: |
+           touch .env
+           echo "${{secrets.PRODUCTION_SECRET}}" > .env
+      
     - name: Restart backend with PM2
       run: pm2 restart Backend || pm2 start server.js --name Backend
