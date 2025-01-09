@@ -1,5 +1,5 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+# This workflow will do a clean installation of node dependencies, cache/restore them,
+# build the source code, and run tests across different versions of node.
 
 name: Node.js CI
 
@@ -25,13 +25,16 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+        cache: 'pnpm'
 
-    - name: Install PM2 globally
-      run: npm install -g pm2
+    - name: Install pnpm globally
+      run: npm install -g pnpm
 
     - name: Install dependencies
-      run: npm ci
+      run: pnpm install --frozen-lockfile
+     
+    - name: Install PM2 globally
+      run: pnpm install -g pm2
 
     - name: Restart backend with PM2
-      run: pm2 restart Backend
+      run: pm2 restart Backend || pm2 start server.js --name Backend
