@@ -10,7 +10,7 @@ app.get("/api/get_user_details",(req,res)=>{
 		name:"ridham savaliya",
 		age:21,
 		gender:"male",
-		hobby:"sex",
+		hobby:"Music/Gaming",
 		degree:"BCA"
 	}})
 })
